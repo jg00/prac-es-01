@@ -14,5 +14,5 @@ function taggedCallback(strings, func) {
 }
 
 const taggedLiteralCallback = taggedCallback`Rob Jim Bill ${() =>
-  testFunction()}`;
+  testFunction()}`; // Notice this is the same template literal but we execute it as a tagged template.
 console.log(taggedLiteralCallback);
