@@ -3,7 +3,7 @@
 // Note this still works the same was as the constructor function
 class SuperHero {
   constructor(name, strength, speed, weapon, cape) {
-    name;
+    this.name = name;
     this.strength = strength;
     this.speed = speed;
     this.weapon = weapon;
