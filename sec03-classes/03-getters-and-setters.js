@@ -26,8 +26,10 @@ let hero1 = new SuperHero(...handDetails);
 hero1.name = "Stark";
 
 hero1.name;
+hero1._name = "Boyd"; // still accessible
 
-hero1.powerUp(); // private field _strength not accessible
-hero1._speed = 2; // private field _speed not accessible
+hero1.powerUp(); // field strength no longer exists accessible
+hero1._strength = 18; // field is still accessible
+hero1._speed = 88; // field _speed is still accessible
 
 console.log(hero1);
