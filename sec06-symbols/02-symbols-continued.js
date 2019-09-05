@@ -9,7 +9,7 @@ const CARMODEL = Symbol();
 
 class Car {
   constructor(color, make, model) {
-    this[CARCOLOR] = color;
+    this[CARCOLOR] = color; // can't do this.CARCOLOR because this is a property. We need [] bracket notation to evaluate the variable CARCOLOR and this variable references this Symbol()
     this[CARMAKE] = make;
     this[CARMODEL] = model;
   }
@@ -25,7 +25,7 @@ class Car {
 
 let myCar = new Car(`Red`, `Chevy`, `Tahoe`);
 console.log(myCar);
-myCar.color = "Blue";
+myCar.color = "Blue"; // Unless you have a getter and setter, a new color property will just be added to the object and not update the property.  this[CARCOLOR] is not accessible from outside.
 console.log(myCar);
 console.log(myCar[CARMODEL]);
 console.log(myCar.color);

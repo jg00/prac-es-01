@@ -28,4 +28,4 @@ console.log(Symbol() === Symbol()); // false
 const a = Symbol(); // a is unique
 const b = Symbol(); // b is unique
 console.log(a === b); // false
-console.log(a);
+console.log(a); // Symbol()
