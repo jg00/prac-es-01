@@ -4,7 +4,7 @@ weakMap
   2. It is not an iterable, and only has get(), set(), has(), delete(). (.entries(), .size(), etc are not valid methods for WeakMap())
 */
 
-// Map() - uncomment to run
+// 1 Map() - uncomment to run
 // Map() and weakMap() will be same up to here
 /*
 let aStrongMap = new Map();
@@ -18,7 +18,7 @@ friend = null; // The object should no longer exists.  But with Map(), the MapIt
 console.log(aStrongMap.entries()); // With Map() the MapIterator still exists. Also remember .entries() returns an iterator
 */
 
-// WeakMap() - uncomment to run
+// 2 WeakMap() - uncomment to run
 /*
 let aWeakMap = new WeakMap();
 let friend = { friend: "Bill" };
@@ -29,13 +29,13 @@ friend = null; // undefined
 console.log(aWeakMap.get(friend)); // Here that key-value will be removed entrirely from the WeakMap()
 */
 
-// Another use case example
+// 3 Another use case example
 const userData = {
   numberOfUsers: 2,
   status: 200,
   users: [
     {
-      name: `Rob`,
+      name: `Dennis`,
       number: `1-515-555-1234`
     },
     {
@@ -44,3 +44,33 @@ const userData = {
     }
   ]
 };
+
+let aWeakMap = new WeakMap();
+
+function updateUsers(userData) {
+  userData.users.forEach(user => {
+    aWeakMap.set(user, `Stuff ${user.name}`);
+  });
+}
+
+updateUsers(userData);
+console.log(aWeakMap.get(userData.users[0])); // Stuff Dennis
+console.log(aWeakMap.get(userData.users[1])); // Stuff Jim
+
+// As a scenario lets say the users[0] becomes null
+userData.users[0] = null; // Here 1. this object will no longer exists but also 2. the key-value pair will no longer exists in the WeakMap
+
+console.log(aWeakMap.get(userData.users[0])); // undefined
+console.log(aWeakMap.get(userData.users[1])); // Stuff Jim
+
+console.log(userData);
+/*
+{ numberOfUsers: 2,
+  status: 200,
+  users: [  null,    <-- No longer in the weakmap
+          { name: 'Jim', number: '1-515-555-9876' } 
+        ] 
+}
+*/
+
+// updateUsers(userData);  Will no longer work because the user object no longer exists.

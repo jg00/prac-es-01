@@ -2,7 +2,7 @@
 // Map - Key/Value pair (Javascript)
 
 /*
-In Java we instantiate a hash map like below
+1 In Java we instantiate a hash map like below
 - Remember that below myContact is a HashMap and that is why we have access to .entrySet(), .getKey(), .getValue(), .keySet()
 
 import java.util.*;
@@ -31,7 +31,7 @@ class Main {
 */
 
 /*
-In Javascript we don't have to define the key-value data types like in Java example above.
+2 In Javascript we don't have to define the key-value data types like in Java example above.
 - const myContact = new Map()
 - Map is a key-value pair.  
 - It is far more protected than a regular object.
@@ -49,7 +49,7 @@ Side note:
   localStorage works excatly like Map using .set, .get
 */
 
-// Map()
+// 3 Map()
 let myContacts = new Map();
 
 // .get() and .set()
