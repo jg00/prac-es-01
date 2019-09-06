@@ -30,4 +30,4 @@ console.log(myCar);
 console.log(myCar[CARMODEL]);
 console.log(myCar.color);
 
-console.log(Symbol.for(`test`) == Symbol.for(`test`));
+console.log(Symbol.for(`test`) == Symbol.for(`test`)); // Searches Javascript table of Symbols and checks if exists.
