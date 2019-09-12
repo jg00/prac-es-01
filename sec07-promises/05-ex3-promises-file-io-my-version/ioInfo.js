@@ -22,7 +22,7 @@ function getFileContents(fileName) {
   return new Promise((resolve, reject) => {
     fs.readFile(filePath, (err, data) => {
       // console.log(fileName, data);
-      if (!err) resolve(data);
+      if (!err) resolve({ data: data, fileName: fileName });
       else reject(err);
     });
   });
@@ -30,9 +30,68 @@ function getFileContents(fileName) {
 
 function main() {
   const fileNames = getDirectoryFilesNames();
+
+  // 1, 2 Print file names in directory
   fileNames.then(fileNamesArray => {
+    console.log(fileNamesArray);
     fileNamesArray.forEach(fileName => {
       console.log(fileName);
+    });
+  });
+
+  // 3 Print name and file content
+  fileNames.then(fileNamesArray => {
+    const filePromises = fileNamesArray.map(fileName => {
+      return getFileContents(fileName);
+    });
+
+    Promise.all(filePromises).then(contentArray => {
+      contentArray.forEach(content => {
+        // console.log(content.fileName, content.data.toString());
+
+        let currentFile = content.fileName;
+        // console.log(currentFile);
+
+        let fileContent = content.data.toString();
+        let words = fileContent.split(" ");
+        // console.log(words);
+
+        const totalOccurences = words.reduce((total, word) => {
+          if (word.indexOf("gotYa") > -1) {
+            return (total = total + 1);
+          }
+          return total;
+        }, 0);
+
+        const result = {
+          file: content.fileName,
+          totalOccurences: totalOccurences
+        };
+
+        console.log(result);
+      });
+    });
+
+    // First to complete
+    Promise.race(filePromises).then(contentArray => {
+      let currentFile = contentArray.fileName;
+
+      let fileContent = contentArray.data.toString();
+      let words = fileContent.split(" ");
+
+      const totalOccurences = words.reduce((total, word) => {
+        if (word.indexOf("gotYa") > -1) {
+          return (total = total + 1);
+        }
+        return total;
+      }, 0);
+
+      const result = {
+        file: contentArray.fileName,
+        totalOccurences: totalOccurences
+      };
+
+      console.log("First to complete:", result);
     });
   });
 }
