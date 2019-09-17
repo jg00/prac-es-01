@@ -1,3 +1,7 @@
+/*
+  Scenario - Validate new value for every set call
+*/
+
 let manager = {
   office: `Dubai`,
   dept: `Sales`,

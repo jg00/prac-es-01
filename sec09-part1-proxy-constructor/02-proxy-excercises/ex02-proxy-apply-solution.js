@@ -10,15 +10,12 @@ function importantFunction(dataToAppend) {
 
 const handler = {
   apply: (target, thisArg, argsList) => {
-    // console.log(target.name); // importantFunction
-    // console.log(thisArg);  // undefined
-    // console.log(argsList); // ['A param']
-
     const logData = `${target.name}, ${argsList}, ${new Date()}\n`;
 
     fs.appendFile("proxyLog.txt", logData, err => {
       if (!err) {
-        return target(argsList[0]);
+        // STILL NEED TO CALL THE FUNCTION
+        target(...argsList);
       } else {
         console.log(
           "importantFunction() unable to execute and no logs created."
@@ -28,7 +25,7 @@ const handler = {
   }
 };
 
-const importantFunctionProxy = new Proxy(importantFunction, handler);
+const importantProxy = new Proxy(importantFunction, handler);
 
-importantFunctionProxy("A param");
-// importantFunctionProxy("A second call");
+importantProxy("A param", "well");
+importantProxy("A second call");
