@@ -1,0 +1,47 @@
+<button class="btn" type="button">Click to run the generator!</button>
+
+<script type="text/javascript">
+  function* counter() {
+    let i = 0;
+    while (true) {
+      console.log("I'm before the yield");
+
+      // Example - no data from outside
+      // yield i++; // eventhough we are inside the while loop, this generator will stop/pause
+      // console.log("I'm after the yield");
+
+      // Example - data from outside - This is how you make data from outside available via the yield keyword
+      const dataFromNext = yield i++;
+      console.log(dataFromNext, i);
+    }
+  }
+
+  const gen = counter(); // Iterator called Generator returned
+
+  document.querySelector(".btn").addEventListener("click", () => {
+    // Example - no data from outside
+    // console.log(gen.next()); // also returns an object > {value: 0, done: false}; value=0 because value of i++ has not been incremented yet at this point
+
+    // Example - data from outside - A value passed to next() will be treated as the result
+    // of the last yield expression that paused the generator
+    console.log(gen.next("This is some data"));
+  });
+
+  /*
+    {value: 0, done: false};
+    {value: 1, done: false};
+
+    > This gives us a feature that stores in memory a variable i
+    > When it pauses execution the only memory it is taking up is variable i
+    > It doesn't have to loop over data again
+    > It also protects our counter i. After we run .next() the first time, the lines before
+      yield runs (let i = 0) and we enter the while(true) which means we are stuck/kept in that
+      while loop because of the yeild unless some condition is met
+    > This uses power of closures.  The function* has it's own local scope and no one can alter variable i (ie protected internally)
+    
+    > We can affect from the outside what happens on the inside by passing arguments in the .next(args)
+
+
+
+  */
+</script>
