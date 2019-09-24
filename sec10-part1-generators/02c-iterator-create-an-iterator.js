@@ -31,13 +31,16 @@ function makeRangeIterator(start, end, step) {
           done: false
         };
         nextIndex += step; // nexIndex is 'preserved' inside of this child function
+        // First time we get here will be when (nextIndex < end).  Thant means returned is still false initially.
       } else if (!returned) {
         result = {
           value: nextIndex,
           done: true
         };
         returned = true;
+        // At this point if two conditions above are no longer true, below will run if next() is called again.
       } else {
+        console.log("Last");
         result = { done: true };
       }
       return result;
@@ -45,7 +48,8 @@ function makeRangeIterator(start, end, step) {
   };
 }
 
-let it = makeRangeIterator(1, 10, 2);
+let it = makeRangeIterator(1, 10, 2); // We are returning the code assigned to the next property.
+console.log(it); // { next: [Function: next] }
 
 let result = it.next();
 while (!result.done) {
@@ -53,4 +57,6 @@ while (!result.done) {
   result = it.next();
 }
 
+it.next(); // "Last"
+it.next(); // "Last"
 console.log("Iterated over sequence of size: ", result.value); // [5 numbers returned, that took interval in between: 0 to 10]
