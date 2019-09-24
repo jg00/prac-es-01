@@ -12,6 +12,10 @@ function myIterator(myArray) {
   };
 }
 
+/*
+  yield keyword in a generator is similar to the return of the object {value: 1, done: false}
+*/
+
 const anArray = [1, 4, 54, 3, 45, 62345, 413, 354, 2];
 const gen = myIterator(anArray);
 console.log(gen.next()); // { value: 1, done: false }
