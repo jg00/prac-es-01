@@ -1,5 +1,5 @@
 /*
-  Iterator is an object which implements the Iterator protocol by having a next() method
+  Iterator is an object which implements the "Iterator protocol" by having a next() method
   which returns an object with two properties:
     value - the next value in the sequence
     done - true if the last value in the sequence has already been consumed.
