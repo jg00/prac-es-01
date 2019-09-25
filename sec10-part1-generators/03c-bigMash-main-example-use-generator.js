@@ -24,21 +24,22 @@ function* myIterator(myArray) {
 const anArray = [1, 4, 54, 3, 45, 62345, 413, 354, 2];
 const gen = myIterator(anArray);
 
+/* Now you can replace below with a for..of */
 for (let elem of gen) {
   console.log(elem);
 }
 
-/* Replace with for..of above instead of using .next() of the Generator (ie Iterator) explicitly
+// /* Replace with for..of above instead of using .next() of the Generator (ie Iterator) explicitly
 console.log(gen.next()); // { value: 1, done: false }
 console.log(gen.next()); // { value: 4, done: false }
-console.log(gen.next());
-console.log(gen.next());
-console.log(gen.next());
-console.log(gen.next());
-console.log(gen.next("exit"));
-console.log(gen.next());
-console.log(gen.next());
+// console.log(gen.next());
+// console.log(gen.next());
+// console.log(gen.next());
+// console.log(gen.next());
+// console.log(gen.next("exit"));
+// console.log(gen.next());
+// console.log(gen.next());
 
-console.log(gen.next()); // { done: true }
-console.log(gen.next()); // { done: true }
-*/
+// console.log(gen.next()); // { done: true }
+// console.log(gen.next()); // { done: true }
+// */
